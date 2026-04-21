@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GraspAuto: Real-Time Single-Tap Grasp Authoring for VR/AR Experiences. A method for generating realistic hand grasps on any 3D object from a single user tap.">
+  <meta property="og:title" content="GraspAuto: Real-Time Single-Tap Grasp Authoring">
+  <meta property="og:description" content="Single-tap VR grasp generator powered by grip-sphere conditioning and conditional flow matching.">
+  <meta property="og:image" content="assets/teaser.png">
+  <title>GraspAuto: Real-Time Single-Tap Grasp Authoring for VR/AR Experiences</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&amp;family=Noto+Serif:wght@400;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Google Sans', 'Noto Serif', sans-serif;
+      color: #2a2a2a;
+      background: #ffffff;
+    }
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .hero.is-light { background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%); }
+    .author-block a { color: #1b5e9e; text-decoration: none; border-bottom: 1px dotted #1b5e9e; }
+    .author-block a:hover { color: #0d3a66; }
+    .publication-links .button {
+      margin: 0.35rem;
+      background: #2a2a2a;
+      color: #ffffff;
+      border-color: #2a2a2a;
+      font-weight: 500;
+    }
+    .publication-links .button:hover { background: #4d4d4d; border-color: #4d4d4d; }
+    .abstract-text { text-align: justify; line-height: 1.65; font-size: 1.05rem; color: #333; }
+    .section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.35rem;
+    }
+    .fig-caption {
+      font-size: 0.92rem;
+      color: #555;
+      text-align: center;
+      margin-top: 0.75rem;
+      line-height: 1.5;
+    }
+    .teaser-wrap video { width: 100%; border-radius: 8px; }
+    body strong { color: #1b3a6e; font-weight: 700; }
+    table.results { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem; }
+    table.results th, table.results td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid #e4e4e4;
+    }
+    table.results thead th {
+      border-top: 2px solid #1b3a6e;
+      border-bottom: 2px solid #1b3a6e;
+      background: #f2f6fb;
+      color: #1b3a6e;
+      font-weight: 700;
+    }
+    table.results tr.highlight { background: #fff9e6; font-weight: 600; }
+    table.results tr.muted td { color: #888; font-style: italic; }
+    pre.bibtex {
+      background: #1e1e1e;
+      color: #e8e8e8;
+      padding: 1.25rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    .copy-btn {
+      float: right;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.25); }
+    footer { background: #f4f4f6; padding: 2rem 1rem; margin-top: 3rem; text-align: center; font-size: 0.85rem; color: #666; }
+    .key-point {
+      background: #eef5fb;
+      border-left: 4px solid #1b5e9e;
+      padding: 1rem 1.25rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1rem 0;
+      color: #1b3a6e;
+      line-height: 1.6;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-right: 0.4rem;
+    }
+    .badge-seen { background: #d4e8d4; color: #2a5e2a; }
+    .badge-unseen { background: #f4d3c6; color: #8a4321; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="publication-title is-size-2-desktop is-size-3-mobile">
+        GraspAuto: Real-Time Single-Tap Grasp Authoring for VR/AR Experiences
+      </h1>
+
+      <div class="is-size-5-desktop is-size-6-mobile author-block mt-4">
+        <span><a href="mailto:qy264@cornell.edu">Qingxuan Yan</a></span>
+        <span>&nbsp;&middot;&nbsp;</span>
+        <span><a href="mailto:xc529@cornell.edu">Xiang Chang</a></span>
+      </div>
+      <div class="is-size-6 has-text-grey mt-2">
+        Cornell Tech, Cornell University &nbsp;&middot;&nbsp; HKUST (Guangzhou)
+      </div>
+      <div class="is-size-6 has-text-grey-dark mt-1">
+        Submitted to ACM SIGGRAPH 2026 Posters
+      </div>
+
+      <div class="publication-links mt-5">
+        <a href="paper/main.pdf" class="button is-rounded" target="_blank">
+          <span class="icon"><i class="fas fa-file-pdf"></i></span>
+          <span>Paper</span>
+        </a>
+        <a href="paper/supplementary.pdf" class="button is-rounded" target="_blank">
+          <span class="icon"><i class="fas fa-file-lines"></i></span>
+          <span>Supplementary</span>
+        </a>
+        <a href="https://github.com/crazycatseven/GraspAuto" class="button is-rounded">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>Code</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEASER VIDEO -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="teaser-wrap">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="assets/teaser_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p class="fig-caption mt-3">
+      GraspAuto generates realistic hand grasps on ten objects, two taps each. A single deployable checkpoint produces every pose; the scene rotates so the contact configuration is visible from multiple angles.
+    </p>
+  </div>
+</section>
+
+<!-- ABSTRACT -->
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <h2 class="section-title">Abstract</h2>
+    <p class="abstract-text">
+      <strong>GraspAuto</strong> is a method for generating a realistic VR hand grasp from a single user tap on a 3D object, producing a controllable pose that conforms to the indicated contact point without motion-capture recording or per-joint tuning. Inference fits within a standalone VR headset's latency budget, so the same system serves content creators as an offline grasp-authoring tool and VR applications as a live hand-synthesis module at runtime.
+    </p>
+    <p class="abstract-text mt-3">
+      The key idea is a geometric conditioning token, a <strong>grip-sphere</strong> specifying where to grasp, how wide to open, and from which direction to approach, easy to elicit from a VR controller and dataset-agnostic enough for joint training across grasp corpora. On ContactPose, a single GraspAuto checkpoint transfers to never-seen object classes roughly twice as reliably as a heatmap-conditioned baseline with the same backbone and training data.
+    </p>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <h2 class="section-title">Approach</h2>
+    <figure>
+      <img src="assets/pipeline_final.png" alt="GraspAuto pipeline" style="width:100%;">
+      <figcaption class="fig-caption">
+        <strong>Pipeline.</strong> A frozen Point-M2AE encodes the object mesh into 64 patch tokens; the adapter fuses them with the 7-D grip-sphere (palm centre <em>c</em>, aperture <em>r</em>, approach direction <em>n</em>) through top-<em>K</em> tap-centered locality gating. A Perceiver-IO velocity network samples in a 32-D latent space via conditional flow matching, which the ResAE decodes to MANO parameters and a VR hand pose in OpenXR or Quest SDK format.
+      </figcaption>
+    </figure>
+
+    <div class="key-point mt-6">
+      <strong>Why the grip-sphere?</strong> Earlier generators relied on per-dataset heatmap statistics that could not transfer between ContactPose, OakInk, and GraspXL. The 7-D grip-sphere is deterministic from any MANO-annotated sample, which flips multi-dataset mixing from a 6–10 mm regression under the old token to <em>monotone improvement</em> (12.36 &rarr; 11.70 &rarr; 10.64 mm bo-1 TRUE SEEN) as data quality rises.
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLLABILITY FIGURE -->
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <h2 class="section-title">Tap-Conditioned Controllability</h2>
+    <figure>
+      <img src="assets/mode_cover.png" alt="Controllability: different tap locations on a mug and hammer" style="width:100%;">
+      <figcaption class="fig-caption">
+        Three tap locations on a mug (top) and a hammer (bottom). The inset mini-map marks each tap in yellow. All six grasps come from a single GraspAuto checkpoint (bo-64 selector-picked); <em>r</em> is the grip aperture in millimetres.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <h2 class="section-title">Results</h2>
+    <p class="abstract-text">
+      Mode-cover error (mm) on ContactPose. We report TRUE SEEN on 21 object classes (<em>N</em>=179 samples) and CP-UNSEEN on the remaining 4 classes (bowl, headphones, toothbrush, wine_glass; 37 samples). Both subsets use participants disjoint from training; CP-UNSEEN is a per-class reporting split, not a class-level holdout. Latency quoted for Quest 3 is projected from an RTX 4090 measurement (34 ms, scaled conservatively).
+    </p>
+    <table class="results">
+      <thead>
+        <tr>
+          <th>Config</th>
+          <th>TRUE SEEN</th>
+          <th>CP-UNSEEN</th>
+          <th>&lt;10 mm</th>
+          <th>Latency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Codebook retrieval (ours, baseline)</td><td>62.3</td><td>-</td><td>0%</td><td>5 s</td></tr>
+        <tr><td>Heatmap-palm distill student</td><td>12.48</td><td>27.9</td><td>36%</td><td>60 ms</td></tr>
+        <tr><td>Sphere, CP-only</td><td>12.36</td><td>15.92</td><td>45%</td><td>60 ms</td></tr>
+        <tr><td>Sphere, CP + OakInk mix</td><td>11.70</td><td>14.86</td><td>55%</td><td>60 ms</td></tr>
+        <tr class="highlight"><td>Sphere, CP + OakInk filtered (shipped)</td><td>10.64</td><td>13.70</td><td>59%</td><td>60 ms</td></tr>
+        <tr class="muted"><td>8-member pool, GT oracle (mean)</td><td>6.13</td><td>7.58</td><td>89%</td><td>30 s</td></tr>
+        <tr class="muted"><td>&nbsp;&nbsp;&nbsp; median</td><td>5.14</td><td>6.79</td><td>-</td><td>-</td></tr>
+        <tr><td>Consensus medoid (deployable, no GT)</td><td>9.74</td><td>12.71</td><td>67%</td><td>2 s</td></tr>
+      </tbody>
+    </table>
+    <p class="fig-caption mt-4">
+      Swapping the 11-D heatmap token for the 7-D grip-sphere cuts CP-UNSEEN bo-1 error from 27.9 to 13.70 mm (a 51% reduction) while keeping the single-checkpoint student real-time at 60 ms/tap.
+    </p>
+  </div>
+</section>
+
+<!-- STATUS / CODE -->
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <h2 class="section-title">Code &amp; Weights</h2>
+    <p class="abstract-text">
+      The reference implementation (training, evaluation, ONNX export) and trained weights are available in this repository: <a href="https://github.com/crazycatseven/GraspAuto">github.com/crazycatseven/GraspAuto</a>. The <strong>Unity Sentis integration</strong> for on-device VR deployment will be released soon. For questions or research-artefact access, please contact the authors directly.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>
+    Template adapted from <a href="https://nerfies.github.io/" target="_blank">Nerfies</a> and
+    <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>. Released under a Creative Commons BY-SA license.
+  </p>
+  <p class="mt-2">
+    <a href="https://github.com/crazycatseven/GraspAuto">GitHub repository</a> &middot;
+    <a href="mailto:qy264@cornell.edu">qy264@cornell.edu</a>
+  </p>
+</footer>
+
+<script>
+  function copyBibtex() {
+    const text = document.getElementById('bibtex-text').innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      const btn = document.querySelector('.copy-btn');
+      const original = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> copied';
+      setTimeout(() => { btn.innerHTML = original; }, 1800);
+    });
+  }
+</script>
+
+</body>
+</html>

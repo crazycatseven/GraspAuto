@@ -1,0 +1,74 @@
+{
+  "val_idx": 47,
+  "obj_id": 15,
+  "tolerances": {
+    "adapter": 0.0001,
+    "velocity_net": 0.0001,
+    "ae_decoder": 0.0001,
+    "point_m2ae": 0.005
+  },
+  "results": {
+    "adapter": {
+      "name": "adapter",
+      "shape": [
+        1,
+        65,
+        256
+      ],
+      "max_abs": 1.0728836059570312e-06,
+      "mean_abs": 4.258187031015181e-08,
+      "max_rel": 0.00022588489283052266,
+      "mean_rel": 3.4834806330180894e-07,
+      "torch_norm": 92.74956512451172,
+      "onnx_norm": 92.74956512451172,
+      "tolerance": 0.0001,
+      "passed": true
+    },
+    "velocity_net": {
+      "name": "velocity_net",
+      "shape": [
+        1,
+        32
+      ],
+      "max_abs": 3.0994415283203125e-06,
+      "mean_abs": 8.25151801109314e-07,
+      "max_rel": 2.1891311812708172e-05,
+      "mean_rel": 1.4690090761007464e-06,
+      "torch_norm": 14.65386962890625,
+      "onnx_norm": 14.65386962890625,
+      "tolerance": 0.0001,
+      "passed": true
+    },
+    "ae_decoder": {
+      "name": "ae_decoder",
+      "shape": [
+        1,
+        54
+      ],
+      "max_abs": 8.344650268554688e-07,
+      "mean_abs": 1.54258924777861e-07,
+      "max_rel": 1.5535299772747034e-05,
+      "mean_rel": 9.95022927956702e-07,
+      "torch_norm": 4.876014232635498,
+      "onnx_norm": 4.876014232635498,
+      "tolerance": 0.0001,
+      "passed": true
+    },
+    "point_m2ae": {
+      "name": "point_m2ae",
+      "shape": [
+        1,
+        64,
+        384
+      ],
+      "max_abs": 4.76837158203125e-06,
+      "mean_abs": 3.385228866115142e-07,
+      "max_rel": 0.02119892697043093,
+      "mean_rel": 6.629056964281837e-06,
+      "torch_norm": 113.3752212524414,
+      "onnx_norm": 113.37522888183594,
+      "tolerance": 0.005,
+      "passed": true
+    }
+  }
+}

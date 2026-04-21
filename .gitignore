@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+.DS_Store
+.idea/
+.vscode/
+
+# Datasets and trained artefacts — see DATA.md for how to recreate these.
+outputs/
+data/
+checkpoints/
+assets/mano_v1_2/
+
+# Run/build leftovers
+*.log
+*.tmp
+teaser_video_frames/
